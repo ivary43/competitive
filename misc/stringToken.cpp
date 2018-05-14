@@ -1,5 +1,5 @@
-#include "/Users/manishkumar/Downloads/Header/stdc++.h"
-//#include<bits/stdc++.h>
+//#include "/Users/manishkumar/Downloads/Header/stdc++.h"
+#include<bits/stdc++.h>
 using namespace std ;
 #define pb push_back
 #define INF 1e5
@@ -7,13 +7,6 @@ using namespace std ;
 #define f(i,a,b) for(int i=a;i<b;i++)
 #define rep(n) f(i,0,n)
 #define vs vector<string>
-
-void swap( string *xp, string *yp)
-{
-    string temp = *xp;
-    *xp = *yp;
-    *yp = temp;
-}
 
 int main() {
     
@@ -29,12 +22,12 @@ int main() {
         vector <string> tokens;
         
         // stringstream class check1
-        stringstream check1(str);
+        stringstream ch(str);
         
         string intermediate;
         
         // Tokenizing w.r.t. space ' '
-        while(getline(check1, intermediate, '.'))
+        while(getline(ch, intermediate, '.'))
         {
             tokens.push_back(intermediate);
         }
@@ -42,7 +35,8 @@ int main() {
         int s = (int)tokens.size();
         rep(s/2) {
             
-            swap(&tokens[i],&tokens[s-i-1]);
+            tokens[i].swap(tokens[s-i-1]);
+            
         }
         
         rep(s) {
