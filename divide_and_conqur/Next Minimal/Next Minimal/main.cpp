@@ -1,72 +1,44 @@
 #include "/Users/manishkumar/Work/stdc++.h"
 //#include <bits/stdc++.h>
 using namespace std;
-//char findLowest(vector<int> arr) {
-//    for(int i=0;i<26;++i) {
-//        if(arr[i]!=0) {
-//            return (char)(97+i);
-//        }
-//    }
-//    return 'a';
-//}
+bool findLowest(vector<int> arr,int c) {
+    for(int i=0;i<c;++i) {
+        if(arr[i]>0) {
+            return true;
+        }
+    }
+    return false;
+}
 
 int main() {
     
     string s;
     cin>>s ;
-    stack<char> st;
-    for(char c:s) {
-        if(!st.empty() && c < st.top()) {
-            while(!st.empty() && c < st.top() ) {
-                st.pop();
-            }
-        }
-            st.push(c);
+    vector<int> vi(26);
+    for(char ch:s) {
+        vi[ch-'a']++;
     }
+    
+    stack<char> st;
+    int i=0 ;
     string res = "";
+    while(i<s.length()) {
+        if(st.empty() || findLowest(vi, st.top()-'a')) {
+            st.push(s[i]);
+            vi[s[i]-'a']--;
+            i++;
+            
+        } else {
+            res+=(st.top());
+            st.pop();
+        }
+    }
+    
     while(!st.empty()) {
-        res=st.top()+res;
+        res+=(st.top());
         st.pop();
     }
-    string residual = "";
-    int i=0 ; int n = (int)res.size();
-    for(char c:s) {
-        if( (i<n) && c == res[i]) {
-            ++i;
-        } else {
-            residual+=c;
-        }
-    }
-    reverse(residual.begin(), residual.end());
-    res+=residual;
+     
     cout<<res<<endl;
-    
-    
-    
-//
-//    vector<int> arr(26);
-//    for(char ch:s) {
-//        arr[ch-'a']++;
-//    }
-//
-//    char nextSmallest = findLowest(arr);
-//    string residual = "";
-//    string res = "";
-//    for(char ch: s) {
-//        if(arr[nextSmallest- 'a'] == 0 ) {
-//            nextSmallest = findLowest(arr);
-//        }
-//
-//        if(ch == nextSmallest) {
-//            res+=nextSmallest;
-//            arr[nextSmallest-'a']--;
-//        } else {
-//            residual+=ch;
-//        }
-//    }
-//    reverse(residual.begin(), residual.end());
-//    res+=residual;
-//    cout<<res<<endl;
-    
     return 0;
 }
