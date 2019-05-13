@@ -19,6 +19,7 @@ int main() {
         for(int i=1000;i>0;--i) {
             if(arr[i]>=2 && l == -1) {
                 l = i;
+                break;
             } else if(arr[i]>=2 && b ==-1) {
                 b = i;
                 break;
