@@ -37,7 +37,7 @@ int main() {
         long int sum = 0;
         int head = 0;
         for(int i=0;i<n;++i) {
-            if(arr[head]<=diff[i]) {
+            if(head<m_ && arr[head]<=diff[i]) {
                 sum+=(diff[i]-arr[head]);
                 head++;
             } else if(head>=m_) {
