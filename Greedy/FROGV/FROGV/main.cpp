@@ -55,7 +55,7 @@ int main() {
     for(it=res.begin();it!=res.end();++it) {
         cout<<it->first<<" "<<it->second<<endl;
     }
-    cout<<"-------------------------------"<<endl;  
+    cout<<"-------------------------------"<<endl;
     
     int x, y;
     for(int i=0;i<p;++i) {
