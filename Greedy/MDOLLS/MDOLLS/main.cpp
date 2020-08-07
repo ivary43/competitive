@@ -12,12 +12,13 @@ using namespace std;
 
 bool cmp( pair<int, int> a, pair<int, int> b )
 {
-    if( a.first == b.first ) return  a.second > b.second ;
+    if( a.first == b.first ) return  a.second < b.second ;
     else return a.first < b.first;
 }
 
 int main()
 {
+    SYNC
     int t;
     scanf("%d", &t);
     
@@ -33,27 +34,32 @@ int main()
         
         sort( dolls.begin(), dolls.end(), cmp );
         
-        vector< pair<int, int> > v;
-        v.push_back( dolls[n - 1] );
+        vector< pair<int, int> > v2;
+        v2.push_back( dolls[n - 1] );
         
-        for(int i = n - 2; i >= 0; i--) {
+        for(int i=n-2;i>=0;--i) {
             
-            int lo = 0, hi = v.size() - 1, mid;
+            int low = 0 ;
+            int high = (int)v2.size()-1;
             
-            while(lo <= hi) {
-                mid = (hi + lo) / 2;
-                if( v[mid].first == dolls[i].first || v[mid].second <= dolls[i].second )
-                    lo = mid + 1;
-                else hi = mid - 1;
+            while(low<high) {
+                int mid = (low+high)>>1;
+                if( (dolls[i].first <= v2[mid].first) && (dolls[i].second <= v2[mid].second)) {
+                    high=mid ;
+                } else {
+                    low = mid+1;
+                }
             }
             
-            if( lo >= v.size() ) v.push_back( dolls[i] );
-            else {
-                v[lo].first = dolls[i].first;
-                v[lo].second = dolls[i].second;
+            if( (dolls[i].first <= v2[low].first) && (dolls[i].second <= v2[low].second)) {
+                v2[low].first = dolls[i].first ;
+                v2[low].second = dolls[i].second ;
+            } else {
+                v2.push_back(dolls[i]);
             }
+            
         }
-        printf("%d\n", (int) v.size() );
+        cout<<v2.size()<<endl;
         
     }
     
